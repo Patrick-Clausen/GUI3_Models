@@ -18,7 +18,7 @@
 
             <div class="form-group">
                 <label for="newDaysWork">Days of work:</label>
-                <input type="number" v-model="newDaysWork" placeholder="Enter days here" v-validate="'max:2147483647'" />
+                <input type="number" v-model="newDaysWork" placeholder="Enter days here" v-validate="'max:2000'" />
             </div>
             <br />
 
@@ -89,7 +89,7 @@
                 }
 
                 let url = "https://localhost:44368/api/Jobs";
-                let objectToSend = { customer: this.newJobCustomer, startDate: this.newStartDate, days: this.newDaysWork, location: this.newLocation, comments: this.newComment };
+                let objectToSend = { customer: this.newJobCustomer, startDate: this.newStartDate, days: parseFloat(this.newDaysWork), location: this.newLocation, comments: this.newComment };
 
                 try {
                     let response = await fetch(url,
@@ -99,7 +99,7 @@
                             credentials: 'include',
                             headers: new Headers({
                                 'Authorization': 'Bearer ' + localStorage.getItem("token"),
-                                "Content-Type": "application/json"
+                                'Content-Type': "application/json"  
                             })
                         });
                     if (response.ok) {
