@@ -231,7 +231,7 @@
                     return;
                 }
 
-                let url = "https://localhost:44368/api/Manager";
+                let url = "https://localhost:44368/api/Managers";
                 let objectToSend = { firstName: this.newManagerfirstName, lastName: this.newManagerlastName, email: this.newManagerEmail, password: this.newManagerPassword };
 
                 try {
