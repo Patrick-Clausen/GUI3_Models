@@ -35,11 +35,15 @@
         },
 
         methods: {
+            gotosite(url) {
+                this.$router.push(url)
+            },
             onLogoutPressed: function () {
                 this.loggedIn = false;
                 this.accountName = "";
                 localStorage.removeItem("token");
                 localStorage.removeItem("email");
+                this.gotosite('/');
             }
         }
     }
