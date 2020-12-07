@@ -57,6 +57,7 @@ export default {
             }
         } catch (err) {
             alert("Error: " + err);
+            return -1;
         }
         return 0;
     }
