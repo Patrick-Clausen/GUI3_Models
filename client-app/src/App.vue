@@ -23,13 +23,14 @@
             return {
                 loggedIn: localStorage.getItem("token"),
                 accountName: localStorage.getItem("email"),
-                isManager: (localStorage.getItem("isManager") === 'true')
+                isManager: (localStorage.getItem("isManager") == 'true')
             }
         },
 
         mounted() {
             this.$root.$on('loggedInSuccessfully', () => {
                 this.loggedIn = true;
+                this.isManager = (localStorage.getItem("isManager") == 'true')
                 this.accountName = localStorage.getItem("email");
             });
         },
@@ -40,8 +41,10 @@
             },
             onLogoutPressed: function () {
                 this.loggedIn = false;
+                this.isManager = false;
                 this.accountName = "";
                 localStorage.removeItem("token");
+                localStorage.removeItem("isManager");
                 localStorage.removeItem("email");
                 this.gotosite('/');
             }
