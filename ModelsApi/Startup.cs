@@ -92,7 +92,7 @@ namespace ModelsApi
             // Configure cors
             app.UseCors(x => x
                 //.AllowAnyOrigin() // Not allowed together with AllowCredential
-                .WithOrigins("http://localhost:8080", "http://localhost:5000" )
+                .WithOrigins("http://localhost:8080", "http://localhost:5000", "http://localhost:8081")
                 .SetIsOriginAllowed(x => _ = true)
                 .AllowAnyMethod()
                 .AllowAnyHeader()
