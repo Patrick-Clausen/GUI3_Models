@@ -39,6 +39,7 @@
             onLogoutPressed: function () {
                 this.loggedIn = false;
                 this.isManager = false;
+                
             },
         }
     }
