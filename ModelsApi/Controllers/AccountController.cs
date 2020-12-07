@@ -68,6 +68,16 @@ namespace ModelsApi.Controllers
                         LoginResponse response = new LoginResponse();
                         response.LoginToken = token;
                         response.LoginId = account.EfAccountId;
+                        if (response.IsManager)
+                        {
+                            response.SpecificId = _context.Managers.Where(u => u.EfAccountId == response.LoginId)
+                                .Select(o => o.EfManagerId).First();
+                        }
+                        else
+                        {
+                            response.SpecificId = _context.Models.Where(u => u.EfAccountId == response.LoginId)
+                                .Select(o => o.EfModelId).First();
+                        }
                         response.IsManager = account.IsManager;
                         return response;
                     }
@@ -148,5 +158,6 @@ namespace ModelsApi.Controllers
         public Token LoginToken { get; set; }
         public long LoginId { get; set; }
         public bool IsManager { get; set; }
+        public long SpecificId { get; set; }//ManagerId or ModelId
     }
 }

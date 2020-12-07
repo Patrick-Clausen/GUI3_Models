@@ -6,7 +6,7 @@
 
             <div class="form-group">
                 <label for="newJobCustomer">Customer*:</label>
-                <input v-model="newJobCustomer" placeholder="Enter customer here" v-validate="'required|min:1|max:64" />
+                <input v-model="newJobCustomer" placeholder="Enter customer here" v-validate="'required|min:1|max:64'" />
             </div>
             <br/>
 
