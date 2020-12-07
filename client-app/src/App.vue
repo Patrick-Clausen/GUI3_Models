@@ -3,7 +3,7 @@
     <div id="topnav" class="topnav">
         <div class="leftnav">
             <router-link to="/">Home</router-link>
-            <router-link v-if="loggedIn" to="/accounts">Accounts</router-link>
+            <router-link v-if="loggedIn && isManager" to="/accounts">Accounts</router-link>
             <router-link v-if="loggedIn" to="/jobs">Jobs</router-link>
         </div>
         <div class="rightnav">
@@ -22,7 +22,8 @@
         data() {
             return {
                 loggedIn: localStorage.getItem("token"),
-                accountName: localStorage.getItem("email")
+                accountName: localStorage.getItem("email"),
+                isManager: (localStorage.getItem("isManager") === 'true')
             }
         },
 

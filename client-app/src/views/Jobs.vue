@@ -1,9 +1,8 @@
 ﻿<template>
     <div class="jobs">
         <h1>Welcome to the Job management page!</h1>
-        <div v-if="isManager">
             <div class="center">
-                <div class="button-grp">
+                <div class="button-grp" v-if="isManager">
                     <a v-on:click="gotosite('createjob')">Create new Job</a>
                 </div>
 
@@ -12,22 +11,13 @@
                 </div>
 
                 <div class="button-grp">
-                    <a v-on:click="gotosite('joblistmanager')">List of Jobs</a>
-                </div>
-             </div>
-        </div>
-
-        <div v-if="isModel">
-            <div class="center">
-                <div class="button-grp">
-                    <a v-on:click="gotosite('joblistmodel')">List of Jobs</a>
+                    <a v-on:click="gotosite('joblist')">List of Jobs</a>
                 </div>
 
-                <div class="button-grp">
+                <div class="button-grp" v-if="!isManager">
                     <a v-on:click="gotosite('addexpense')">Add Expense</a>
                 </div>
              </div>
-        </div>
     </div>
 
 
@@ -38,13 +28,18 @@
         name: "jobs",
 
         data() {
-            return { isManager: localStorage.getItem("isManager") }
+            return { isManager: (localStorage.getItem("isManager") === 'true') }
         },
 
         methods: {
             gotosite(url) {
                 this.$router.push(url)
-            }
+            },
+
+            onLogoutPressed: function () {
+                this.loggedIn = false;
+                this.isManager = false;
+            },
         }
     }
 </script>

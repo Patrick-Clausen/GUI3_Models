@@ -200,7 +200,7 @@
         mounted() {
             this.$root.$on('loggedInSuccessfully', () => {
                 this.loggedIn = true;
-                this.isManager = localStorage.getItem("isManager");
+                this.isManager = (localStorage.getItem("isManager") === 'true');
             });
         },
 

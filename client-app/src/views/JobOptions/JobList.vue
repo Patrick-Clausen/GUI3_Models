@@ -1,5 +1,5 @@
 ﻿<template>
-    <div class="joblistModel">
+    <div class="joblist">
         <h1>Job List</h1>
 
     </div>

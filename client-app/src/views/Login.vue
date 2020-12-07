@@ -46,7 +46,7 @@ export default {
                 let answer = await response.json();
                 //alert("Server returned: " + token.toString());
                 localStorage.setItem("token", answer.loginToken.jwt);
-                localStorage.setItem("isManager", answer.IsManager);
+                localStorage.setItem("isManager", answer.isManager);
                 localStorage.setItem("loginId", answer.loginId);
                 localStorage.setItem("email", email);
                 // Change view to some other component

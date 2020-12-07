@@ -6,8 +6,7 @@ import accounts from '../views/Accounts.vue'
 import jobs from '../views/Jobs.vue'
 import addexpense from '../views/JobOptions/AddExpense.vue'
 import createjob from '../views/JobOptions/CreateJob.vue'
-import joblistma from '../views/JobOptions/JobListManager.vue'
-import joblistmo from '../views/JobOptions/JobListModel.vue'
+import joblist from '../views/JobOptions/JobList.vue'
 import employment from '../views/JobOptions/ModelEmployment.vue'
 
 Vue.use(VueRouter)
@@ -44,14 +43,9 @@ const routes = [
         component: createjob
     },
     {
-        path: '/joblistmanager',
-        name: 'JobListManager',
-        component: joblistma
-    },
-    {
-        path: '/joblistmodel',
-        name: 'JobListModel',
-        component: joblistmo
+        path: '/joblist',
+        name: 'JobList',
+        component: joblist
     },
     {
         path: '/modelemployment',
