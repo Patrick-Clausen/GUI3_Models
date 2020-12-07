@@ -250,6 +250,7 @@
                         this.newManagerfirstName = "";
                         this.newManagerlastName = "";
                         this.newManagerPassword = "";
+                        this.ManagerMessage = "Manager created";
                         return 0;
                     } else {
                         alert("Server returned: " + response.statusText);
@@ -314,6 +315,7 @@
                         this.newModelEyeColor = "";
                         this.newModelComments = "";
                         this.newModelPassword = "";
+                        this.ModelMessage = "Model created";
                         return 0;
                         
                     } else {
