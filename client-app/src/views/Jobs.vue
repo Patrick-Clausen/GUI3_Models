@@ -6,7 +6,7 @@
                     <a v-on:click="gotosite('createjob')">Create new Job</a>
                 </div>
 
-                <div class="button-grp">
+                <div class="button-grp" v-if="isManager">
                     <a v-on:click="gotosite('modelemployment')">Model Employment</a>
                 </div>
 
