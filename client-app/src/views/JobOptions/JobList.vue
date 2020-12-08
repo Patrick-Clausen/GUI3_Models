@@ -2,7 +2,7 @@
     <div class="joblist">
         <h1>Job List</h1>
         <div class="center">
-            <ul id="list" style="list-style-type:none;" v-if="isManager">
+            <ul style="list-style-type:none;" v-if="isManager">
                 <li v-for="job in jobs" :key="job" class="item">
                     <a v-on:click="gotosite('modelemployment')">
                         At {{job.location}} for {{job.customer}}
@@ -68,8 +68,8 @@
     .center {
         margin: 0;
         position: absolute;
-        top: 30%;
-        left: 50%;
+        top: 50%;
+        left: 49%;
         -ms-transform: translate(-50%, -50%);
         transform: translate(-50%, -50%);
     }
