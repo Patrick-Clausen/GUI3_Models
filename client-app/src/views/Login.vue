@@ -71,6 +71,7 @@ export default {
         text-align: center;
         padding: 15px;
         text-decoration: none;
+        cursor: pointer;
     }
 
         .loginbutton:hover {

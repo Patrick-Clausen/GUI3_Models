@@ -62,15 +62,21 @@
                 newComment: "",
                 loggedIn: localStorage.getItem("token"),
                 isManager: localStorage.getItem("isManager"),
+
             }
         },
 
 
-        methods: {
-            onLogoutPressed: function () {
-                this.loggedIn = false;
-                this.isManager = false;
-            },
+            methods: {
+                gotosite(url) {
+                    this.$router.push(url)
+                },
+
+                onLogoutPressed: function () {
+                    this.loggedIn = false;
+                    this.isManager = false;
+                    this.gotosite('/');
+                },
 
             onSubmitNewJobPressed: async function () {
                 if (this.newJobCustomer === "") {

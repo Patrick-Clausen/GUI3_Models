@@ -32,14 +32,14 @@
         },
 
         methods: {
-            gotosite(url) {
+            gotosite: function (url) {
                 this.$router.push(url)
             },
 
             onLogoutPressed: function () {
                 this.loggedIn = false;
                 this.isManager = false;
-                
+                this.gotosite('/');
             },
         }
     }
