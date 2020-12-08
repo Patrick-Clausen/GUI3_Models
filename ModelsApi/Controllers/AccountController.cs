@@ -68,7 +68,7 @@ namespace ModelsApi.Controllers
                         LoginResponse response = new LoginResponse();
                         response.LoginToken = token;
                         response.LoginId = account.EfAccountId;
-                        if (response.IsManager)
+                        if (account.IsManager)
                         {
                             response.SpecificId = _context.Managers.Where(u => u.EfAccountId == response.LoginId)
                                 .Select(o => o.EfManagerId).First();

@@ -25,7 +25,7 @@
             <br />
 
             <div class="form-group">
-                <label for="amount">First name*: </label>
+                <label for="amount">Expenditure amount*: </label>
                 <input type="number" v-model="amount" placeholder="Enter expenditure amount here" />
             </div>
             <br />
