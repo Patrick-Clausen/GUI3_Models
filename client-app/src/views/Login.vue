@@ -48,6 +48,7 @@ export default {
                 localStorage.setItem("token", answer.loginToken.jwt);
                 localStorage.setItem("isManager", answer.isManager);
                 localStorage.setItem("loginId", answer.loginId);
+                localStorage.setItem("specificId", answer.specificId);
                 localStorage.setItem("email", email);
                 // Change view to some other component
                 // …

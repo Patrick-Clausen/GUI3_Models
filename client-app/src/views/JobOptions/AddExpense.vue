@@ -1,65 +1,122 @@
 ﻿<template>
     <div class="addExpense">
         <h1>Add an expense to a job</h1>
-            <h2>Create a new manager</h2>
 
-            <form id="newManagerForm">
+        <form id="expenseform">
 
-                <div class="form-group">
-                    <label for="modelId">Model*: </label>
-                    <select v-model="modelId" placeholder="Select model"/>
-                </div>
-                <br />
-
-                <div class="form-group">
-                    <label for="newManagerfirstName">First name*: </label>
-                    <input v-model="newManagerfirstName" placeholder="Enter first name here" v-validate="'required|min:1|max:40'" />
-                </div>
-                <br />
-
-                <div class="form-group">
-                    <label for="date">Date*: </label>
-                    <input type="date" v-model="date" placeholder="Enter date of expense here" v-validate="'required|min:1|max:40'" />
-                </div>
-                <br />
-
-                <div class="form-group">
-                    <label for="newManagerPassword">Password*: </label>
-                    <input type="password" v-model="newManagerPassword" placeholder="Enter password here" v-validate="'required|min:1|max:40'" />
-                </div>
-                <br />
-
-                <div class="form-group">
-                    <a type="type" class="submitbutton" v-on:click="onSubmitNewManagerPressed">Submit</a>
-                </div>
-                <br />
-
-                <span class="text-danger">{{ManagerMessage}}</span>
-            </form>
-
+            <div class="form-group">
+                <label for="jobId">Job*: </label>
+                <select v-model="jobId" placeholder="Select job">
+                    <option v-for="test in jobs" :key="test" :value="test.efJobId">At {{test.location}} for {{test.customer}}</option>
+                </select>
+            </div>
             <br />
+
+            <div class="form-group">
+                <label for="date">Date*: </label>
+                <input type="date" v-model="date" placeholder="Enter date of expense here" />
+            </div>
+            <br />
+
+            <div class="form-group">
+                <label for="text">Expense text*: </label>
+                <input v-model="text" placeholder="Enter expense text here" />
+            </div>
+            <br />
+
+            <div class="form-group">
+                <label for="amount">First name*: </label>
+                <input type="number" v-model="amount" placeholder="Enter expenditure amount here" />
+            </div>
+            <br />
+
+            <div class="form-group">
+                <a type="type" class="submitbutton" v-on:click="onSubmitPressed">Submit</a>
+            </div>
+            <br />
+
+            <span class="text-danger">{{Message}}</span>
+          
+        </form>
 
     </div>
 </template>
 
 <script>
     export default {
-        name: "jobs",
+        name: "AddExpense",
 
         data() {
-            return { isManager: (localStorage.getItem("isManager") === 'true') }
+            return {
+                Message: "",
+                isManager: (localStorage.getItem("isManager") == 'true'),
+                jobs: [],
+                jobId: undefined,
+                date: undefined,
+                amount: undefined,
+                text: "",
+            }
         },
 
+        mounted() {
+            this.getJobs();
+        },
+        
+
         methods: {
-            gotosite(url) {
+            gotosite: function (url) {
                 this.$router.push(url)
             },
 
-            onLogoutPressed: function () {
-                this.loggedIn = false;
-                this.isManager = false;
-                this.gotosite('/');
+            getJobs: async function () {
+                let url = "https://localhost:44368/api/Jobs";
+                fetch(url, {
+                    method: 'GET', // Or DELETE
+                    credentials: 'include',
+                    headers: {
+                        'Authorization': 'Bearer ' + localStorage.getItem("token"),
+                        'Content-Type': 'application/json'
+                    },
+                }).then(async responseJson => {
+                    this.jobs = await responseJson.json();
+                });
             },
+
+            onSubmitPressed: async function () {
+                let url = "https://localhost:44368/api/Expenses";
+                try {
+                    let response = await fetch(url, {
+                        method: 'POST', // Or DELETE
+                        credentials: 'include',
+                        headers: {
+                            'Authorization': 'Bearer ' + localStorage.getItem("token"),
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({
+                            "modelId": parseInt(localStorage.getItem("specificId")),
+                            jobId: this.jobId,
+                            date: this.date,
+                            text: this.text,
+                            amount: parseFloat(this.amount),
+                        }),
+                    });
+
+                    if (response.ok) {
+                        this.Message = "Expense created";
+                        this.jobId = undefined;
+                        this.date = undefined;
+                        this.amount = undefined;
+                        this.text = "";
+                    } else {
+                        this.Message = "Failed!";
+                    }
+                } catch (err) {
+                    alert("Server failed with error: " + err);
+                }
+                
+
+                
+            }
         }
     }
 </script>
